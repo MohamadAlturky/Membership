@@ -21,7 +21,7 @@ builder.Services.AddAuthorization();
 #region DbContext
 builder.Services.AddDbContext<UsersDataContext>(config =>
 {
-    config.UseSqlServer(builder.Configuration.GetConnectionString("MembershipDB"));
+    config.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 #endregion
 
