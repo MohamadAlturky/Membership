@@ -39,7 +39,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: AllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:3000")
+                          policy.WithOrigins(["http://localhost:3000","http://172.29.3.110:3000","http://bpmn.hiast.edu.sy"])
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
@@ -51,12 +51,11 @@ var app = builder.Build();
 app.MapIdentityApi<User>();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 app.UseCors(AllowSpecificOrigins);
+app.MapGet("/",() => "Auth Service Is Running 🔥🔥");
 app.Run();
