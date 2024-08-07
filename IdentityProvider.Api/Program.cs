@@ -1,10 +1,7 @@
+using System.Security.Claims;
 using IdentityProvider.Api.Data;
-using Microsoft.AspNetCore.Authentication.BearerToken;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +53,19 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
 app.UseCors(AllowSpecificOrigins);
+
 app.MapGet("/",() => "Auth Service Is Running 🔥🔥");
+
+app.MapGet("/user/", async(ClaimsPrincipal claimsPrincipals,UsersDataContext dbContext) => {
+    var id = claimsPrincipals.Claims.First(c=>c.Type == ClaimTypes.NameIdentifier).Value;
+    return await dbContext.Users.FindAsync(int.Parse(id));
+}).RequireAuthorization();
+
+app.MapGet("/userId/", (ClaimsPrincipal claimsPrincipals,UsersDataContext dbContext) => {
+    var id = claimsPrincipals.Claims.First(c=>c.Type == ClaimTypes.NameIdentifier).Value;
+    return int.Parse(id);
+}).RequireAuthorization();
+
 app.Run();

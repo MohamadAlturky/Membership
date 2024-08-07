@@ -1,6 +1,6 @@
-@IdentityProvider.Api_HostAddress = http://localhost:5028
+@baseUrl = http://172.29.3.110:8098
+@token = CfDJ8F_wG1kx4sNNoxeTtbH0L0IiGpu_mSHsFM30yj9LpihClO8_DlY5ZpW15eolKcHODp1nJZ_d1gOc339DC25UmT99zjCq5VNdeaB8Yz2UpvaMaKMdm_DoitS0YlLZcqa5ruG0kEJ3s9aLybsvfvG2cjJ9b7q8zHyUxTf3wrwe3DyUYDFI9Jdx-alZJdgdXottkkiUIWPuYF9sPxQ1-_KSgC-q8D9nPMFy8JrTvm5NBE2iRGo3LqArjgUziPZvIx5nKUkSXSqNqWe25w9vxeQJyjUkB58m4zG4CgTbJlSV4fxCd4Sa38V5t8U8VRol9SpEFYrXdrOWWvWyn5c9eAnrEE8CYzH-0ONmB16dsA0_pejwYdxZKY9EE73OCtg84YuICxxLQSGQFWsdW5Tx3CIfOKXdKhYQNDYJqts7x_Bj2Ez8GiTTH9qzVMA1nUD31ld-pbMVjfcild3MFW5XME_jzGlQrMzDd5K0YJT2btGqHHnJdfT3u5fjSnEF8umEZBypoRYqaizD4Wev5oQlrYJpzEH4jij8sxBb80I6dZbozvuK0ndgXaT6605KyGxmApHPeUolK9QTP85sVZGZWs9fseSKbxnySkl1Ol9aYa3vlU5-NSUx7sIme-SiDgBJSxpK9mjtRuXucmUlZk5NGO2wel4
 
-GET {{IdentityProvider.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
+### Get User
+GET {{baseUrl}}/userId/
+Authorization: Bearer {{token}}
