@@ -43,6 +43,12 @@ builder.Services.AddCors(options =>
                       });
 });
 #endregion
+
+#region Reverse Proxy
+builder.Services.AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+
+#endregion
 var app = builder.Build();
 
 app.MapIdentityApi<User>();
@@ -68,4 +74,5 @@ app.MapGet("/userId/", (ClaimsPrincipal claimsPrincipals,UsersDataContext dbCont
     return int.Parse(id);
 }).RequireAuthorization();
 
+app.MapReverseProxy();
 app.Run();
