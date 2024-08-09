@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using IdentityProvider.Api.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -55,12 +56,13 @@ app.MapIdentityApi<User>();
 
 // Configure the HTTP request pipeline.
 
+app.UseCors(AllowSpecificOrigins);
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseHttpsRedirection();
 
-app.UseCors(AllowSpecificOrigins);
 
 app.MapGet("/",() => "Auth Service Is Running 🔥🔥");
 
@@ -73,6 +75,43 @@ app.MapGet("/userId/", (ClaimsPrincipal claimsPrincipals,UsersDataContext dbCont
     var id = claimsPrincipals.Claims.First(c=>c.Type == ClaimTypes.NameIdentifier).Value;
     return int.Parse(id);
 }).RequireAuthorization();
+
+
+app.MapPost("/users", async ([FromBody]List<int> ids, UsersDataContext dbContext) =>
+{
+    if (ids == null || !ids.Any())
+    {
+        return Results.BadRequest("No user IDs provided.");
+    }
+
+    var users = await dbContext.Users
+        .Where(user => ids.Contains(user.Id))
+        .Select(e=>new{e.Id,e.UserName,e.Email})
+        .ToListAsync();
+
+    if (!users.Any())
+    {
+        return Results.NotFound("No users found for the given IDs.");
+    }
+
+    return Results.Ok(users);
+});
+app.MapGet("/users", async ([FromQuery]string emailSubstring,ClaimsPrincipal claimsPrincipals, UsersDataContext dbContext) =>
+{
+    var id = claimsPrincipals.Claims.First(c=>c.Type == ClaimTypes.NameIdentifier).Value;
+    
+    var users = await dbContext.Users
+        .Where(u => u.Email.Contains(emailSubstring))
+        .Where(e=>e.Id!= int.Parse(id))
+        .Select(e=>new{
+            e.Id,
+            e.Email,
+            e.UserName
+        })
+        .ToListAsync();
+
+    return Results.Ok(users);
+});
 
 app.MapReverseProxy();
 app.Run();
