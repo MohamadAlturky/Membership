@@ -79,9 +79,9 @@ app.MapGet("/userId/", (ClaimsPrincipal claimsPrincipals,UsersDataContext dbCont
 
 app.MapPost("/users", async ([FromBody]List<int> ids, UsersDataContext dbContext) =>
 {
-    if (ids == null || !ids.Any())
+    if (ids == null || ids.Count == 0)
     {
-        return Results.BadRequest("No user IDs provided.");
+        return Results.Ok(new List<User>(){});
     }
 
     var users = await dbContext.Users
