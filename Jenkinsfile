@@ -21,7 +21,7 @@ pipeline{
     
         stage("Git SCM"){
             steps {
-                git branch: 'main', url: 'https://github.com/MohamadAlturky/Membership'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/MohamadAlturky/Membership'
             }
 
         }
@@ -51,7 +51,8 @@ pipeline{
         stage('Deploy using docker compose') {
             steps{
                 script {
-                    sh "docker-compose -f IdentityProvider.Api/docker-compose.yaml up"
+                    sh "ls"
+                    // sh "docker-compose -f IdentityProvider.Api/docker-compose.yaml up"
                 }
             }
     }
