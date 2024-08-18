@@ -64,7 +64,7 @@ app.UseAuthorization();
 app.UseHttpsRedirection();
 
 
-app.MapGet("/",() => "Auth Service Is Running 🔥🔥");
+app.MapGet("/",() => "Auth Service Is Running 🔥🔥🔥🔥🔥🔥🔥🔥");
 
 app.MapGet("/user/", async(ClaimsPrincipal claimsPrincipals,UsersDataContext dbContext) => {
     var id = claimsPrincipals.Claims.First(c=>c.Type == ClaimTypes.NameIdentifier).Value;
