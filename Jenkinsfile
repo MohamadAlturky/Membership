@@ -80,9 +80,9 @@ pipeline {
             steps {
                 script {
                     sh 'docker --version'
-                    sh '/usr/bin/docker-compose --version'
+                    // sh 'docker-compose --version'
                     sh 'ls'
-                    sh "/usr/bin/docker-compose -f IdentityProvider.Api/docker-compose.yaml up"
+                    sh "/usr/local/bin/docker-compose -f IdentityProvider.Api/docker-compose.yaml up"
                 }
             }
         }
