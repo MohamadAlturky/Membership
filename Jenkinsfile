@@ -79,12 +79,12 @@ pipeline {
         stage('Run Docker Compose') {
             steps {
                 script {
-                    sh 'docker --version'
-                    sh 'ls'
-                    sh 'docker stop aspnet_app'
-                    sh 'docker rm aspnet_app'
-                    sh 'docker rmi identityproviderapi-webapp'
-                    sh "docker-compose -f IdentityProvider.Api/docker-compose.yaml up -d"
+                    // sh 'docker --version'
+                    // sh 'ls'
+                    // sh 'docker stop aspnet_app'
+                    // sh 'docker rm aspnet_app'
+                    // sh 'docker rmi identityproviderapi-webapp'
+                    sh "docker-compose -f IdentityProvider.Api/docker-compose.yaml up --build -d"
                 }
             }
         }
