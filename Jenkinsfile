@@ -51,8 +51,7 @@ pipeline{
         stage('Deploy using docker compose') {
             steps{
                 script {
-                    sh "ls"
-                    // sh "docker-compose -f IdentityProvider.Api/docker-compose.yaml up"
+                    sh "docker-compose -f IdentityProvider.Api/docker-compose.yaml up"
                 }
             }
     }
