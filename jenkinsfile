@@ -21,7 +21,7 @@ pipeline{
     
         stage("Git SCM"){
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/MohamadAlturky/webApp'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/MohamadAlturky/Membership'
             }
 
         }
