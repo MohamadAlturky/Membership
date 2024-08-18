@@ -81,6 +81,8 @@ pipeline {
                 script {
                     sh 'docker --version'
                     sh 'ls'
+                    sh 'docker stop aspnet_app'
+                    sh 'docker rm aspnet_app'
                     sh "docker-compose -f IdentityProvider.Api/docker-compose.yaml up -d"
                 }
             }
