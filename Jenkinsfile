@@ -79,7 +79,7 @@ pipeline {
         stage('Run Docker Compose') {
             steps {
                 script {
-                    // sh 'docker --version'
+                    sh 'k6 --version'
                     // sh 'ls'
                     // sh 'docker stop aspnet_app'
                     // sh 'docker rm aspnet_app'
