@@ -44,3 +44,4 @@ services:
 
 networks:
   gateway_network:
+      driver: bridge
