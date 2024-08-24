@@ -1,17 +1,3 @@
-# version: '3.8'
-# services:
-#   webapp:
-#     build:
-#       context: .
-#       dockerfile: dockerfile
-#     container_name: aspnet_app
-#     ports:
-#       - "8090:80"
-#     environment:
-#       - ASPNETCORE_URLS=http://+:80
-#       - ConnectionStrings__DefaultConnection=Host=localhost;Port=5477;Database=auth;Username=auth;Password=auth_db@1234
-
-
 version: '3.8'
 
 services:
@@ -27,7 +13,7 @@ services:
     volumes:
       - /home/ubuntu/fifthproj/database/docker/Auth/auth_data:/var/lib/postgresql/data
     networks:
-      - gateway_network
+      - new_gateway_network
 
   webapp:
     build:
@@ -40,8 +26,8 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__DefaultConnection=Host=auth_db;Port=5432;Database=auth;Username=auth;Password=auth_db@1234
     networks:
-      - gateway_network
+      - new_gateway_network
 
 networks:
-  gateway_network:
-      driver: bridge
+  new_gateway_network:
+    # external: true
