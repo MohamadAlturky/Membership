@@ -37,7 +37,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: AllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins(["http://localhost:3000","http://localhost:8073","http://172.29.3.110:3000","http://bpmn.hiast.edu.sy"])
+                          policy.WithOrigins(["http://localhost:3000","http://172.29.3.8:8073","http://localhost:8073","http://172.29.3.110:3000","http://bpmn.hiast.edu.sy"])
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
