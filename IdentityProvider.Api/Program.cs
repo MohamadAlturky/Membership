@@ -12,7 +12,10 @@ builder.Services.AddSwaggerGen();
 #endregion
 
 #region Authentication
-builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
+builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme, options =>
+{
+    options.BearerTokenExpiration = TimeSpan.FromMinutes(3600);
+});
 builder.Services.AddAuthorization();
 #endregion
 
