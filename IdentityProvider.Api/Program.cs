@@ -40,7 +40,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: AllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins(["http://localhost:3000","http://172.29.3.8:8073","http://localhost:8073","http://172.29.3.110:3000","http://bpmn.hiast.edu.sy"])
+                          policy.WithOrigins(["http://localhost:3000","http://172.29.3.8:8073","http://localhost:8073","http://172.29.3.110:3000","http://bpmn.hiast.edu.sy","http://donut.hiast.edu.sy:8073"])
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
@@ -67,7 +67,7 @@ app.UseAuthorization();
 app.UseHttpsRedirection();
 
 
-app.MapGet("/",() => "Auth Service Is Running 🔥🔥🔥-🔥-🔥🔥🔥");
+app.MapGet("/",() => "Gateway Service Is Running 🔥🔥🔥-🔥-🔥🔥🔥");
 
 app.MapGet("/user/", async(ClaimsPrincipal claimsPrincipals,UsersDataContext dbContext) => {
     var id = claimsPrincipals.Claims.First(c=>c.Type == ClaimTypes.NameIdentifier).Value;
